@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue'
 import AnimeDetailsPage from '@/views/AnimeDetailsPage.vue';
+import AnimeListPage from '@/views/AnimeListPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,8 +15,13 @@ const routes: Array<RouteRecordRaw> = [
     component: HomePage
   },
   {
-    path: '/anime/:id',
-    name: 'Details',
+    path: '/list/genre/:genreId',
+    name: 'ListByGenre',
+    component: AnimeListPage
+  },
+  {
+    path: '/anime/details/:id',
+    name: 'AnimeDetails',
     component: AnimeDetailsPage
   }
 ]

@@ -55,5 +55,23 @@ export default {
             console.error('Error fetching anime details:', error);
             throw error;
         }
+    },
+    async getGenres() {
+        try {
+            const response = await axios.get(`${BASE_URL}/genres/anime`);
+            return response.data.data;
+        } catch (error) {
+            console.error('Error fetching genres:', error);
+            throw error;
+        }
+    },
+    async getAnimesByGenre(genreId: number, page: number = 1, limit: number = 10) {
+        try {
+            const response = await axios.get(`${BASE_URL}/anime?genres=${genreId}&page=${page}&limit=${limit}`);
+            return response.data.data;
+        } catch (error) {
+            console.error('Error fetching animes:', error);
+            throw error;
+        }
     }
 };

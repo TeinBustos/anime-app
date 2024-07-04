@@ -1,6 +1,6 @@
 <template>
     <ion-col size="12" size-md="6" size-lg="3">
-        <ion-card :href="`/anime/${anime.mal_id}`">
+        <ion-card :href="`/anime/details/${anime.mal_id}`">
             <img :src="anime.images.jpg.image_url" :alt="anime.title" />
             <ion-card-header>
                 <ion-card-title>{{ anime.title }}</ion-card-title>

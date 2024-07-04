@@ -1,84 +1,59 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Anime List</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-loading :is-open="loading" message="Loading..." :duration="4000" spinner="circles"></ion-loading>
-    <ion-content v-if="!loading">
-      <ion-grid>
+    <ion-content>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ title }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-loading :is-open="loading" message="Loading..." :duration="1000" spinner="circles"></ion-loading>
+      <ion-grid v-if="!loading">
         <ion-row>
-          <anime-card v-for="anime in animes" :key="anime.mal_id" :anime="anime" />
+          <genre-card v-for="genre in genres" :key="genre.mal_id" :genre="genre"/>
         </ion-row>
       </ion-grid>
-      <div class="pagination">
-        <ion-button @click="prevPage" :disabled="page === 1">
-          Previous
-        </ion-button>
-        <span>Page {{ page }}</span>
-        <ion-button @click="nextPage">Next</ion-button>
-      </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonButton, IonLoading } from '@ionic/vue';
+import { IonContent, IonPage, IonTitle, IonHeader, IonToolbar, IonLoading, IonGrid, IonRow } from '@ionic/vue';
+import GenreCard from '@/components/GenreCard.vue';
 import AnimeService from '@/services/AnimeService';
-import AnimeCard from '@/components/AnimeCard.vue';
 
 export default {
   name: 'HomePage',
   components: {
-    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonButton, AnimeCard, IonLoading
+    IonContent, IonPage, IonTitle, IonHeader, IonToolbar, IonLoading, IonGrid, IonRow, GenreCard
   },
   data() {
     return {
-      animes: [],
-      page: 1,
-      limit: 12,
+      title: 'GENRE lIST',
+      genres: [],
       loading: true
     };
   },
   async created() {
-    await this.loadAnimes();
+    await this.loadGenres();
   },
   methods: {
-    async loadAnimes() {
+    async loadGenres() {
       this.loading = true;
-      try {
-        this.animes = await AnimeService.getAnimes(this.page, this.limit);
-        this.loading = false;
-      } catch (error) {
-        console.error('Error fetching animes:', error);
-        this.loading = false;
-      } 
-      
-    },
-    async nextPage() {
-      this.page += 1;
-      await this.loadAnimes();
-    },
-    async prevPage() {
-      if (this.page > 1) {
-        this.page -= 1;
-        await this.loadAnimes();
-      }
+      this.genres = await AnimeService.getGenres();
+      this.loading = false;
     }
   }
 };
 </script>
 
 <style scoped>
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
+ion-title {
+  text-align: center;
 }
 
-.pagination span {
-  margin: 0 10px;
+ion-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 </style>

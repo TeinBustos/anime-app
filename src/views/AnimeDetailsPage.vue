@@ -18,7 +18,7 @@
                 </ion-card-header>
                 <ion-card-content>
                     <ion-accordion-group>
-                        <ion-accordion value="first">
+                        <ion-accordion value="first" v-if="anime.type">
                             <ion-item slot="header" color="light">
                                 <ion-label>Type</ion-label>
                             </ion-item>
@@ -26,7 +26,7 @@
                                 <p> {{ anime.type }} </p>
                             </div>
                         </ion-accordion>
-                        <ion-accordion value="second">
+                        <ion-accordion value="second" v-if="anime.episodes">
                             <ion-item slot="header" color="light">
                                 <ion-label>Episodes</ion-label>
                             </ion-item>
@@ -34,7 +34,7 @@
                                 <p> {{ anime.episodes }}</p>
                             </div>
                         </ion-accordion>
-                        <ion-accordion value="third">
+                        <ion-accordion value="third" v-if="anime.status">
                             <ion-item slot="header" color="light">
                                 <ion-label>Status</ion-label>
                             </ion-item>
@@ -42,7 +42,7 @@
                                 <p> {{ anime.status }}</p>
                             </div>
                         </ion-accordion>
-                        <ion-accordion value="four">
+                        <ion-accordion value="four" v-if="anime.score">
                             <ion-item slot="header" color="light">
                                 <ion-label>Score</ion-label>
                             </ion-item>
@@ -50,7 +50,7 @@
                                 <p> {{ anime.score }}</p>
                             </div>
                         </ion-accordion>
-                        <ion-accordion value="five">
+                        <ion-accordion value="five" v-if="anime.aired.from">
                             <ion-item slot="header" color="light">
                                 <ion-label>Start Date</ion-label>
                             </ion-item>
@@ -58,7 +58,7 @@
                                 <p> {{ anime.aired.from }}</p>
                             </div>
                         </ion-accordion>
-                        <ion-accordion value="six">
+                        <ion-accordion value="six" v-if="anime.aired.to">
                             <ion-item slot="header" color="light">
                                 <ion-label>End Date</ion-label>
                             </ion-item>
@@ -131,5 +131,10 @@ ion-card.small-card {
 ion-card img {
     width: 100%;
     height: auto;
+}
+
+ion-title {
+    margin-right: 70px;
+    text-align: center;
 }
 </style>
