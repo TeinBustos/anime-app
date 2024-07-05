@@ -25,8 +25,4 @@ ion-card {
     text-align: center;
 }
 
-ion-card img {
-    width: 100%;
-    height: auto;
-}
 </style>

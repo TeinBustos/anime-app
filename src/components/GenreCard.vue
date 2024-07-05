@@ -24,5 +24,6 @@ export default defineComponent({
 <style scoped>
 ion-card {
     text-align: center;
+    width: 100%;
 }
 </style>
